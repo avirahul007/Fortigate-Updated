@@ -4,7 +4,7 @@
   - fortinet.fortios
   connection: httpapi
   vars:
-   vdom: "root"
+   vdom: "Mentioned the VDOM Name in which want to Land"
    ansible_httpapi_use_ssl: yes
    ansible_httpapi_validate_certs: no
    ansible_httpapi_port: 443
@@ -12,6 +12,7 @@
   - name: Configure global attributes.
     fortios_system_global:
       vdom:  "{{ vdom }}"
+      access_token: "{{ fortios_access_token }}" #access token variable which will be reffered from your host file.
       system_global:
         admintimeout: "23"
         hostname: "FortiGate11"
