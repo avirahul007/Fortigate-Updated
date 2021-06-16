@@ -1,24 +1,48 @@
-![Fortinet logo|](https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Fortinet_logo.svg/320px-Fortinet_logo.svg.png)
+![AVI logo|](https://upload.wikimedia.org/wikipedia/commons/e/e3/AVI-logo.png)
 
-## FortiOS Ansible Collection
+## Description
 ***
 
-The collection is the FortiOS Ansible Automation project. It includes the modules that are able to  configure FortiOS and FortiGate by allowing the user to configure firewall features. 
+Automate your Fotigate and FortiOS Jobs/Task using FortiOS Galaxy Collections. The collection is the FortiOS Ansible Automation project distributed via ansible-galaxy (https://galaxy.ansible.com/) . It includes the modules that are able to  configure FortiOS and FortiGate by allowing the user to configure firewall features.
 
-## Installation
-This collection is distributed via [ansible-galaxy](https://galaxy.ansible.com/), the installation steps are as follows:
+We will start with listing down the pre-requisistes required for the setup, followed by steps to run you first sample playbook!!
 
-1. Install or upgrade to Ansible 2.9+
-2. Download this collection from galaxy: `ansible-galaxy collection install fortinet.fortios`
 
-## Requirements
-* Ansible 2.9+ is required to support the newer Ansible Collections format
-* fortiosapi>=0.9.8
+## Pre-requisites
+
+1. GIT client to clone this repository.
+2. Install Visual Studio Code (Not Mandate!! but good to have if you are a new coder)
+2. Install Ansible version >= 2.9+  
+3. Install desired FortiOS Galaxy Collection version as per your Fortigate Firewall firmware version (as per below table).
 
 ## Supported FortiOS Versions
 Tested with FOS v6.0.5
 
-## Modules
+Note: Use -f option (i.e. ansible-galaxy collection install -f fortinet.fortios:x.x.x) to renew your existing local installation.
+
+
+## Ready to play your fisrt playbook !! If yes, so lets starts:
+
+  ## Steps:
+
+  1. Create a working directory on your desktop. Example: Fortigate-Project
+  2. Open GIT CLI Client.
+  3. Change your current directory to directory created in step 1 on your GIT client cli.
+  4. Run below command for cloning the repository ==> git clone https://github.com/avirahul007/Fortigate-Updated.git 
+  5. Repository will be cloned by name "Fortigate-Updated"
+  6. Prepare your ansible host inventory where you can define you firewall credentials or api access-token and firewall IP addresses.You can use ansible-vault to encrypt or decrypt your secrets mentioned in host inventory for the sake of confidentiality. 
+    This host file will be located as per mentioned path: /Fortigate-Updated/examples/httpapi/inventory.
+  7. Run your global set variable yaml file to set your global settings/attributes while logging into firewall. The YAML file is located as per mentioned path: /Fortigate-Updated/examples/httpapi, so go to the mentioned path and run below command:
+       ansible-playbook set_system_global.yml -i inventory/hosts
+  8. Now navigate to directory "examples"
+  9. Choose the YAML file for the task which you want to perform on Firewall.
+  10. Edits the resource and object definition based on your enviorment or RFC requirement.
+  11. Run you playbook using below command:
+       ansible-playbook -i inventory/hosts <yaml file name>
+
+
+## Detailed List of Modules Listed in the Collection which can be used to build playbooks depending upon the task you want to perform.
+
 The collection provides the following modules:
 
 * `fortios_alertemail_setting`  Configure alert email settings in Fortinet's FortiOS and FortiGate.
@@ -446,41 +470,3 @@ The collection provides the following modules:
 * `fortios_wireless_controller_wtp_profile`  Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms in Fortinet's FortiOS and FortiGate.
 * `fortios_wireless_controller_wtp`  Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate in Fortinet's FortiOS and FortiGate.
 
-
-## Roles
-
-## Usage
-The following example is used to configure global attributes in Fortinet's FortiOS and FortiGate.
-
-Create fw_global_set.yml with the following template:
-```yaml
----
-- hosts: localhost
-  collections:
-  - fortinet.fortios
-  vars:
-   host: "fwhostname"
-   username: "fwadmin"
-   password: "fwpasswd"
-   vdom: "root"
-   ssl_verify: "False"
-  tasks:
-  - name: Configure global attributes.
-    fortios_system_global:
-      host:  "{{ host }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-      vdom:  "{{ vdom }}"
-      https: "True"
-      ssl_verify:  "{{ ssl_verify }}"
-      system_global:
-        admintimeout: "23"
-        hostname: "FortiGate02"
-```
-
-Run the test:
-```bash
-ansible-playbook fw_global_set.yml
-```
-
-This will configure the firewall's hostname and admin timeout.
