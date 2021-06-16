@@ -38,7 +38,7 @@ Note: Use -f option (i.e. ansible-galaxy collection install -f fortinet.fortios:
   9. Choose the YAML file for the task which you want to perform on Firewall.
   10. Edits the resource and object definition based on your enviorment or RFC requirement.
   11. Run you playbook using below command:
-       ansible-playbook -i inventory/hosts <yaml file name>
+       ansible-playbook -i inventory/hosts filename.yml
 
 
 ## Detailed List of Modules Listed in the Collection which can be used to build playbooks depending upon the task you want to perform.
